@@ -52,7 +52,8 @@ def tfrecord_to_vtu(data_file, meta, output_dir):
     def parse(proto):
         """
         Parse a trajectory from tf.Example
-        Copied from the meshgraphnet repository
+        This function was directly copied from the meshgraphnet repository
+        https://github.com/google-deepmind/deepmind-research/tree/master/meshgraphnets
         """
         feature_lists = {k: tf.io.VarLenFeature(tf.string) for k in meta["field_names"]}
         features = tf.io.parse_single_example(proto, feature_lists)
@@ -116,8 +117,7 @@ def tfrecord_to_vtu(data_file, meta, output_dir):
             mesh = meshio.Mesh(
                 points=coords,
                 cells=cells,
-                point_data=point_data
-            )
+                point_data=point_data)
 
             # Write
             output_filename = os.path.join(odir, f"{findex}.vtu")
