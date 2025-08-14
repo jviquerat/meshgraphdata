@@ -121,7 +121,7 @@ def tfrecord_to_vtu(data_file, meta, output_dir):
 
             # Write
             output_filename = os.path.join(odir, f"{findex}.vtu")
-            mesh.write(output_filename, binary=False)
+            mesh.write(output_filename, binary=True)
 
             timestamps.append(findex)
             filenames.append(output_filename)
