@@ -80,7 +80,6 @@ def tfrecord_to_vtu(data_file, meta, output_dir):
     dataset = dataset.map(parse)
 
     # Process trajectories
-    findex = 0
     for i, trajectory in enumerate(dataset):
         print(f"# Processing trajectory {i}", end="\r")
 
@@ -90,9 +89,10 @@ def tfrecord_to_vtu(data_file, meta, output_dir):
             os.makedirs(odir)
 
         # Unroll the trajectory into frames using only the dynamic fields
-        frames     = tf.data.Dataset.from_tensor_slices(trajectory)
+        frames = tf.data.Dataset.from_tensor_slices(trajectory)
         timestamps = []
         filenames  = []
+        findex = 0
         for frame in frames:
             # Coordinates
             if "world_pos" in meta["field_names"]:
